@@ -5,7 +5,24 @@ const elements = {
     author: document.getElementById("author"),
 };
 
-const quotes = [
+async function getRandomImage() {
+    const client_id = ""; //variable to hold our API key
+    const endpoint = `https://api.unsplash.com/photos/random/?client_id=${client_id}`; //declare a variable to hold the endpoint that we will be touching with our fetch request; clean and readable with string interpolation
+    try { //inside a try/catch block so we can handle errors 
+        const response = await fetch(endpoint);  //make our fetch request to the endpoint and store the result of our request variable named "response"
+        const returnedData = await response.json() //parse into a data format we can use. json() method of the Request interface reads the request body and returns it as a promise that resolves with the result of parsing the body text as JSON
+        const receivedPhotoUrl = returnedData.urls.regular; //accesses the regular img in the dev tools under urls
+        const imgDiv = document.querySelector(".background-img"); //changes the background-img div to flip through random unsplash images
+        imgDiv.style.backgroundImage = `url("${receivedPhotoUrl}")`; //update the backgroundImage property using camelCase
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+getRandomImage();
+
+
+/* const quotes = [
     { 
         quote: "All hands! Abandon ship!",
         author: "Captain Picard",
@@ -33,4 +50,6 @@ function loopThroughQuotes() {
     }, 3000);
 }
 
-setTimeout(loopThroughQuotes, 3000); //wait for 3 seconds and then call the loopThroughQuotes function
+setTimeout(loopThroughQuotes, 3000); //wait for 3 seconds and then call the loopThroughQuotes function */
+
+
