@@ -6,12 +6,11 @@ const elements = {
 };
 
 async function getRandomImage() {
-    const client_id = ""; //variable to hold our API key
-    const endpoint = `https://api.unsplash.com/photos/random/?client_id=${client_id}`; //declare a variable to hold the endpoint that we will be touching with our fetch request; clean and readable with string interpolation
+    const endpoint = "https://localhost:8080/api/v1/getRandomImage"; 
     try { //inside a try/catch block so we can handle errors 
         const response = await fetch(endpoint);  //make our fetch request to the endpoint and store the result of our request variable named "response"
         const returnedData = await response.json() //parse into a data format we can use. json() method of the Request interface reads the request body and returns it as a promise that resolves with the result of parsing the body text as JSON
-        const receivedPhotoUrl = returnedData.urls.regular; //accesses the regular img in the dev tools under urls
+        const receivedPhotoUrl = returnedData.data; //now an object with 2 key-value pairs: status code and data. The data value is the URL for the random image
         const imgDiv = document.querySelector(".background-img"); //changes the background-img div to flip through random unsplash images
         imgDiv.style.backgroundImage = `url("${receivedPhotoUrl}")`; //update the backgroundImage property using camelCase
     } catch (error) {
@@ -19,7 +18,7 @@ async function getRandomImage() {
     }
 }
 
-getRandomImage();
+// getRandomImage();
 
 
 /* const quotes = [
