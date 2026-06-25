@@ -6,7 +6,7 @@ const elements = {
 };
 
 async function getRandomImage() {
-    const endpoint = "https://localhost:8080/api/v1/getRandomImage"; 
+    const endpoint = "http://localhost:8080/api/v1/getRandomImage"; 
     try { //inside a try/catch block so we can handle errors 
         const response = await fetch(endpoint);  //make our fetch request to the endpoint and store the result of our request variable named "response"
         const returnedData = await response.json() //parse into a data format we can use. json() method of the Request interface reads the request body and returns it as a promise that resolves with the result of parsing the body text as JSON
@@ -18,7 +18,7 @@ async function getRandomImage() {
     }
 }
 
-// getRandomImage();
+getRandomImage();
 
 
 /* const quotes = [
